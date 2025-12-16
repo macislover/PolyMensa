@@ -1,0 +1,14 @@
+Package: PolyMensa
+Title: Scrape and Select Weekly Menus from ETH Zurich Mensa Polyterrasse
+Version: 0.0.0.9000
+Authors@R: 
+    person("Leia", "Van Os", , "leia.vanoslopez@uzh.ch", role = c("aut", "cre"))
+Description: Description: This package provides tools to scrape the weekly menu of the ETH Zurich Mensa Polyterrasse using browser automation and to select meals based on user-defined preferences such as day, meal type, dietary style, price, and excluded ingredients.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    chromote,
+    selenider
+
