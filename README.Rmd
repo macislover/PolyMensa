@@ -39,6 +39,24 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 library(PolyMensa)
 ## basic example code
+
+# fetch weekly menus
+df_raw <- fetch_week(headless = TRUE)
+
+# clean the menus
+df_week <- clean_week(df_raw)
+
+# select a menu
+
+han_hunger(
+  df_week,
+  day = "Mi",
+  time = "lunch",
+  style = c("VEGAN, HOME"),
+  avoid = c("Champignons"),
+  max_price = 10
+)
+
 ```
 
 
