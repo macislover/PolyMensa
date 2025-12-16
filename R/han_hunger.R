@@ -23,7 +23,7 @@
 #'   menu matches the filters. Either \code{"cheapest"} or \code{"any"}. Default
 #'   is cheapest$
 #'
-#'   ' @return A one-row data.frame containing the selected menu.
+#' @return A one-row data.frame containing the selected menu.
 #' If no menu can be selected, an empty data.frame is returned.
 #'
 #' @details
