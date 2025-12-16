@@ -2,3 +2,4 @@
 
 export(clean_week)
 export(fetch_week)
+export(han_hunger)

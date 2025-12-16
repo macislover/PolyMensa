@@ -16,9 +16,10 @@
 #' @seealso \code{\link{fetch_week}}, \code{\link{han_hunger}}
 #'
 #' @examples
+#' \dontrun{
 #' df_raw <- fetch_week(headless = TRUE)
-#' df_clean <- clean_week_polyterrasse(df_raw)
-#'
+#' df_clean <- clean_week(df_raw)
+#' }
 #' @export
 clean_week <- function(df) {
 
