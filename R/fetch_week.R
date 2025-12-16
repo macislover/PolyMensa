@@ -76,4 +76,5 @@ fetch_week <- function(headless = FALSE, timeout = 10) {
   }
 
   df_week <- do.call(rbind, lapply(rows, as.data.frame, stringsAsFactors = FALSE))
+  df_week
 }

@@ -10,6 +10,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
     chromote,
-    selenider
+    dplyr,
+    selenider,
+    stringr
 URL: https://github.com/macislover/PolyMensa
 BugReports: https://github.com/macislover/PolyMensa/issues
