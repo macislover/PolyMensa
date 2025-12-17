@@ -26,16 +26,16 @@ clean_week <- function(df) {
   if (missing(df) || is.null(df)) {
     stop("df must be provided")
   }
-
+  .data <- rlang::.data
   df |>
-    dplyr::filter(type != "Hot & Cold 100g" & type != "SUPPE") |>
+    dplyr::filter(.data$type != "Hot & Cold 100g" & .data$type != "SUPPE") |>
     dplyr::mutate(
-      meal = ifelse(stringr::str_ends(type, "ABEND"), "dinner", "lunch"),
-      type = stringr::str_remove(type, " ABEND$")
+      meal = ifelse(stringr::str_ends(.data$type, "ABEND"), "dinner", "lunch"),
+      type = stringr::str_remove(.data$type, " ABEND$")
     ) |>
-    dplyr::relocate(meal, .after = type) |>
+    dplyr::relocate(.data$meal, .after = .data$type) |>
     dplyr::mutate(
-      price = stringr::str_extract(price, "^[^ /]+"),
-      price = as.numeric(price)
+      price = stringr::str_extract(.data$price, "^[^ /]+"),
+      price = as.numeric(.data$price)
     )
 }
