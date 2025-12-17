@@ -31,11 +31,11 @@ Either \code{"lunch"} or \code{"dinner"}. Default is lunch}
 exclude based on the menu description.}
 
 \item{max_price}{Optional numeric value specifying the maximum allowed
-student price (CHF).}
+student price (CHF). It has to be at least 7 when using it.}
 
 \item{fallback}{Character string specifying the fallback strategy if no
 menu matches the filters. Either \code{"cheapest"} or \code{"any"}. Default
-is cheapest$}
+is cheapest}
 }
 \value{
 A one-row data.frame containing the selected menu.

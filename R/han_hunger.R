@@ -84,6 +84,7 @@ han_hunger <- function(df, day, time = "lunch", style = NULL, avoid = NULL, max_
     min_p <- min(d$price)
     cheapest_menus <- d[d$price == min_p, , drop = FALSE]
     if(nrow(cheapest_menus) > 1){
+      message("More than 1 hit, randomly selected")
       idx <- sample(nrow(cheapest_menus), 1)
       return(cheapest_menus[idx, , drop = FALSE])
     }else{
@@ -94,6 +95,7 @@ han_hunger <- function(df, day, time = "lunch", style = NULL, avoid = NULL, max_
     return(d[1, , drop = FALSE])
   }
   if(nrow(d) > 1){
+    message("More than 1 hit, randomly selected")
     idx <- sample(nrow(d), 1)
     return(d[idx, , drop = FALSE])
   }
@@ -103,7 +105,9 @@ han_hunger <- function(df, day, time = "lunch", style = NULL, avoid = NULL, max_
       min_p <- min(df_avoid$price)
       cheapest_avoid <- df_avoid[df_avoid$price == min_p, , drop = FALSE]
       cheapest_avoid <- cheapest_avoid[sample(nrow(cheapest_avoid), 1), , drop = FALSE]
-      return(cheapest_avoid)
+      if(nrow(cheapest_avoid) == 0){ # wenn Preis und avoid keinen Treffer haben
+        stop("No menus found, don't be so picky.")
+      }else{return(cheapest_avoid)}
     }else{
       return(df_avoid[sample(nrow(df_avoid), 1), , drop = FALSE])
     }
