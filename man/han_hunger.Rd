@@ -55,7 +55,6 @@ In this case, filtering is reduced to the \code{avoid} criterion only.
 }
 \examples{
 \dontrun{
-df_raw <- fetch_week(headless = TRUE)
 df_clean <- clean_week(df_raw)
 
 han_hunger(
@@ -70,5 +69,5 @@ han_hunger(
 
 }
 \seealso{
-\code{\link{fetch_week}}, \code{\link{clean_week}}
+\code{\link{clean_week}}
 }

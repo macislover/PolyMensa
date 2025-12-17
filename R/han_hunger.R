@@ -30,11 +30,10 @@
 #' The fallback strategy is applied only if no menu matches all filters.
 #' In this case, filtering is reduced to the \code{avoid} criterion only.
 #'
-#' @seealso \code{\link{fetch_week}}, \code{\link{clean_week}}
+#' @seealso \code{\link{clean_week}}
 #'
 #' @examples
 #' \dontrun{
-#' df_raw <- fetch_week(headless = TRUE)
 #' df_clean <- clean_week(df_raw)
 #'
 #' han_hunger(

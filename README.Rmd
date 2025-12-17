@@ -18,8 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-PolyMensa is a small R package that scrapes the weekly menu of the
-ETH Zurich Mensa Polyterrasse and helps users select a suitable meal
+PolyMensa is a small R package where you can input the scraped weekly menu from the ETH Polyterrase Mensa and helps users clean the dataset and select a suitable meal
 based on preferences such as day, meal time, dietary style, price, and
 ingredients to avoid.
 
@@ -40,8 +39,63 @@ This is a basic example which shows you how to solve a common problem:
 library(PolyMensa)
 ## basic example code
 
-# fetch weekly menus
-df_raw <- fetch_week(headless = TRUE)
+#first you need to scrape the menu:
+library(selenider)
+
+
+session = selenider_session(
+  "chromote",
+  timeout = 10,
+  options = chromote_options(headless = FALSE)
+)
+
+open_url("https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/restaurants-und-cafeterias/zentrum/mensa-polyterrasse.html")
+
+tryCatch({
+  # css: id: #id, class: .class, tag: tag
+  s("#onetrust-accept-btn-handler") |> elem_click()
+}, error = function(e){
+  print(e)
+})
+
+
+# holt beide Links aus diesem paragraph und wählt das für die ganze Woche
+ss("#gastro-menus a.eth-link") |>
+  elem_find(has_text("diese Woche")) |>
+  elem_click()
+
+  ss("section.cp-week__weekday") |>
+    elem_expect(has_at_least(5), timeout = 40)
+
+week_section <- as.list(ss("section.cp-week__weekday"))
+rows <- list()
+day_label <- character(length(week_section))
+
+for(i in seq_along(week_section)){
+  day = week_section[[i]]
+  day_label[i] <- day |> find_element("h2.cp-menu__dayofweek") |> elem_text()
+  
+  menu_week <- day |> find_elements("div.cp-week__days div.cp-menu")
+  menu_list <- as.list(menu_week)
+  
+  for(j in seq_along(menu_list)){
+    menu = menu_list[[j]]
+    type = menu |> find_element(".cp-menu__line-small") |> elem_text()
+    title =  menu |> find_element("h3.cp-menu__title") |> elem_text()
+    description = menu |> find_element(".cp-menu__description") |> elem_text()
+    price = menu |> find_element(".cp-menu__prices .cp-menu__paragraph") |> elem_text()
+    
+    rows[[length(rows) + 1]] <- list(
+      day = day_label[i],
+      type = type,
+      title = title,
+      description = description,
+      price = price
+    )
+  }
+
+}
+df_raw <- do.call(rbind, lapply(rows, as.data.frame)) 
 
 # clean the menus
 df_week <- clean_week(df_raw)

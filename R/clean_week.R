@@ -1,11 +1,12 @@
 #' Clean weekly menu data from Mensa Polyterrasse
 #'
-#' This function cleans the raw menu data returned by \code{fetch_week()}.
+#' This function cleans the raw menu data.
 #' It removes irrelevant menu types, extracts the student price, determines
 #' whether a menu is served for lunch or dinner, and prepares the data for
 #' further filtering and selection.
 #'
-#' @param df A data.frame as returned by \code{fetch_week()}.
+#' @param df A data.frame with the weekly ETH Mensa Menu with the Columns: day, style, title, description and price.
+#' An example Code on how to scrape the ETH Polyterrasse website for the weekly menu is found in the README.Rmd file
 #'
 #' @return A cleaned data.frame which adds the column meal to indicate whether it is from the lunch or dinner menu.
 #'
@@ -13,11 +14,10 @@
 #' Only the student price is retained. Menus labeled as soups or buffet items
 #' are removed.
 #'
-#' @seealso \code{\link{fetch_week}}, \code{\link{han_hunger}}
+#' @seealso \code{\link{han_hunger}}
 #'
 #' @examples
 #' \dontrun{
-#' df_raw <- fetch_week(headless = TRUE)
 #' df_clean <- clean_week(df_raw)
 #' }
 #' @export
