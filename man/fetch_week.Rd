@@ -4,7 +4,7 @@
 \alias{fetch_week}
 \title{Fetch weekly menus from the ETH Zurich Mensa Polyterrasse}
 \usage{
-fetch_week(headless = FALSE, timeout = 10)
+fetch_week(headless = FALSE, timeout = 60)
 }
 \arguments{
 \item{headless}{Logical. If TRUE, runs the browser in headless mode.}
@@ -32,9 +32,11 @@ The returned data is unprocessed and intended to be cleaned using
 \code{clean_week()}.
 }
 \examples{
+\dontrun{
 fetch_week(headless = TRUE)
 
 fetch_week(headless = FALSE, timeout =5)
+}
 }
 \seealso{
 \code{\link{clean_week}}, \code{\link{han_hunger}}

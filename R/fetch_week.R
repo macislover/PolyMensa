@@ -24,10 +24,12 @@
 #' @seealso \code{\link{clean_week}}, \code{\link{han_hunger}}
 #'
 #' @examples
+#' \dontrun{
 #' fetch_week(headless = TRUE)
 #'
 #' fetch_week(headless = FALSE, timeout =5)
-fetch_week <- function(headless = FALSE, timeout = 10) {
+#' }
+fetch_week <- function(headless = FALSE, timeout = 60) {
   session <- selenider::selenider_session(
     "chromote",
     timeout = timeout,
@@ -38,11 +40,13 @@ fetch_week <- function(headless = FALSE, timeout = 10) {
 
   tryCatch({
     # css: id: #id, class: .class, tag: tag
-    s("#onetrust-accept-btn-handler") |> elem_click()
+    selenider::s("#onetrust-accept-btn-handler") |> selenider::elem_click()
   }, error = function(e){
     print(e)
   })
 
+  selenider::ss("section.cp-week__weekday") |>
+    selenider::elem_expect(selenider::has_at_least(1), timeout = 60)
 
   selenider::ss("#gastro-menus a.eth-link") |>
     selenider::elem_find(selenider::has_text("diese Woche")) |>
