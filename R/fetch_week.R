@@ -36,6 +36,13 @@ fetch_week <- function(headless = FALSE, timeout = 10) {
 
   selenider::open_url("https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/restaurants-und-cafeterias/zentrum/mensa-polyterrasse.html")
 
+  tryCatch({
+    # css: id: #id, class: .class, tag: tag
+    s("#onetrust-accept-btn-handler") |> elem_click()
+  }, error = function(e){
+    print(e)
+  })
+
 
   selenider::ss("#gastro-menus a.eth-link") |>
     selenider::elem_find(selenider::has_text("diese Woche")) |>
